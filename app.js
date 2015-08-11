@@ -59,12 +59,17 @@ var fetchReviewList = function (options) {
     options.beforeSend = options.beforeSend || function () { };
     options.success = options.success || function (data, textStatus, jqXHR) { };
     options.error = options.error || function (jqXHR, textStatus, errorThrown) { };
-
+    
+    var data = {
+        page: options.page
+    };
+    if (_config.access_token != '') {
+        data.access_token = _config.access_token;
+    }
+    
     $.ajax({
         url: "https://api.github.com/repos/" + _config.username + "/" + _config.repo + "/issues",
-        data: {
-            page: options.page
-        },
+        data: data,
         beforeSend: options.beforeSend,
         success: function (data, textStatus, jqXHR) {
             options.success(data, jqXHR);

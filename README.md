@@ -7,6 +7,7 @@ Review and share your favorite anime the hub way.
  - [ ] Review list page.
    - [x] Fetch and show the review list.
    - [x] Pre-render the detail pages.
+   - [x] Support GitHub's personal access token for more requests allowed.
    - [ ] Pagination.
  - [ ] Review detail page.
    - [x] Show the pre-rendered detail page.
