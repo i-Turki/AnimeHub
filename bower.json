@@ -14,6 +14,10 @@
     "tests"
   ],
   "dependencies": {
-    "material-design-lite": "~1.0.2"
+    "material-design-lite": "~1.0.2",
+    "vague.js": "~0.0.6",
+    "marked": "~0.3.5",
+    "director": "~1.2.8",
+    "ractive": "~0.7.3"
   }
 }

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>AnimeHub</title>
+  
+  <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+  <script src="bower_components/material-design-lite/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <script src="assets/js/jquery-2.1.4.min.js"></script>
+  <script src="bower_components/director/build/director.min.js"></script>
+  <script src="bower_components/ractive/ractive.min.js"></script>
+  <script src="bower_components/marked/marked.min.js"></script>
+  <script src="config.js"></script>
+</head>
+<body>
+  <div id="main" class="animehub mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    
+    <main id="container" class="animehub-content mdl-layout__content">
+      <center><div id="spinner" class="animehub-spinner mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div></center>
+    </main>
+    
+  </div>
+  
+  <script type="text/ractive" id="listTemplate">
+    <header class="mdl-layout__header mdl-layout__header--transparent mdl-color--grey-100 mdl-color-text--grey-800">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">{{siteTitle}}</span>
+      </div>
+    </header>
+    
+    <main id="container" class="animehub-content mdl-layout__content">
+      
+      <div id="cardList" class="animehub-cards mdl-grid">
+        {{#reviewList}}
+          <div class="mdl-cell mdl-cell--1-col-tablet mdl-cell--hide-desktop mdl-cell--hide-phone"></div>
+          <a href="#review/{{id}}" class="animehub-card mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--4-col-phone" style="background-image: url({{banner}});">
+            <div class="animehub-card__title mdl-card__title mdl-card--expand">
+              <h2 class="animehub-card__title-text mdl-card__title-text">{{title}}</h2>
+            </div>
+          </a>
+          <div class="mdl-cell mdl-cell--1-col-tablet mdl-cell--hide-desktop mdl-cell--hide-phone"></div>
+        {{/reviewList}}
+        
+        {{#if (prev || next)}}
+          <div class="mdl-cell mdl-cell--1-col-tablet mdl-cell--hide-desktop mdl-cell--hide-phone"></div>
+          <div class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            {{#if (prev)}}
+              <button class="mdl-button mdl-js-button">Prev</button>
+            {{else}}
+              <button class="mdl-button mdl-js-button" disabled>Prev</button>
+            {{/if}}
+            
+            {{#if (next)}}
+              <button class="mdl-button mdl-js-button" style="float: right;">Next</button>
+            {{else}}
+              <button class="mdl-button mdl-js-button" style="float: right;" disabled>Next</button>
+            {{/if}}
+          </div>
+          <div class="mdl-cell mdl-cell--1-col-tablet mdl-cell--hide-desktop mdl-cell--hide-phone"></div>
+        {{/if}}
+        
+      </div>
+      
+    </main>
+  </script>
+  
+  <script type="text/ractive" id="detailTemplate">
+    <header class="mdl-layout__header mdl-layout__header--transparent mdl-color--grey-100 mdl-color-text--grey-800">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">{{siteTitle}}</span>
+      </div>
+    </header>
+    
+    <div class="animehub-ribbon"></div>
+    
+    <main class="animehub-review-layout__content mdl-layout__content">
+      <div class="animehub-review__container mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        <div class="animehub-review__content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+          {{#review}}
+            <h3>{{title}}</h3>
+            {{body}}
+          {{/review}}
+        </div>
+      </div>
+    </main>
+  </script>
+  
+  <script src="app.js"></script>
+</body>
+</html>
