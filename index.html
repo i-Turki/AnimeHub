@@ -30,12 +30,12 @@
   
   <script type="text/ractive" id="listTemplate">
     <header class="mdl-layout__header mdl-layout__header--transparent mdl-color--grey-100 mdl-color-text--grey-800">
-      <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">{{siteTitle}}</span>
+      <div class="animehub-layout__header-row mdl-layout__header-row">
+        <a href="#/" class="mdl-layout-title mdl-color-text--grey-800">{{siteTitle}}</a>
       </div>
     </header>
     
-    <main id="container" class="animehub-content mdl-layout__content">
+    <main class="animehub-content mdl-layout__content">
       
       <div id="cardList" class="animehub-cards mdl-grid">
         {{#reviewList}}
@@ -74,9 +74,12 @@
   <script type="text/ractive" id="detailTemplate">
     <header class="mdl-layout__header mdl-layout__header--transparent mdl-color--grey-100 mdl-color-text--grey-800">
       <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">{{siteTitle}}</span>
+        <a href="#/" class="mdl-layout-title mdl-color-text--grey-800">{{siteTitle}}</a>
       </div>
     </header>
+    <a class="mdl-layout__drawer-button" onclick="window.history.back();">
+      <i class="material-icons mdl-color-text--grey-800">arrow_back</i>
+    </a>
     
     <div class="animehub-ribbon"></div>
     
