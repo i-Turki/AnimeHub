@@ -77,3 +77,7 @@ body .animehub {
   padding: 60px 56px;
   margin-bottom: 80px;
 }
+
+.animehub.is-small-screen .animehub-review__content {
+  padding: 30px 28px;
+}
