@@ -237,7 +237,8 @@ var detail = function (id) {
     if (!window.animehub) {
         window.animehub = {}
         window.animehub.reviews = {};
-        window.animehub.reviews[id] = {}
+        window.animehub.reviews[id] = {};
+        window.animehub.reviewList = {};
     }
     
     if (window.animehub.reviews[id].html != undefined) {
