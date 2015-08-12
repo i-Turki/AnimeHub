@@ -52,6 +52,32 @@ var fetchAnimeInfo = function (options) {
     });
 }
 
+// Gets a single review (issue) from the GitHub repo.
+var fetchReview = function (options) {
+    options = (typeof options !== 'object') ? {} : options;
+    options.id = options.id || 1;
+    options.beforeSend = options.beforeSend || function () { };
+    options.success = options.success || function (data, textStatus, jqXHR) { };
+    options.error = options.error || function (jqXHR, textStatus, errorThrown) { };
+    
+    var data = {};
+    if (_config.access_token != '') {
+        data.access_token = _config.access_token;
+    }
+    
+    $.ajax({
+        url: "https://api.github.com/repos/" + _config.username + "/" + _config.repo + "/issues/" + options.id,
+        data: data,
+        beforeSend: options.beforeSend,
+        success: function (data, textStatus, jqXHR) {
+            options.success(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            options.error(errorThrown);
+        }
+    });
+}
+
 // Gets the list of reviews (issues) from the GitHub repo.
 var fetchReviewList = function (options) {
     options = (typeof options !== 'object') ? {} : options;
@@ -82,11 +108,9 @@ var fetchReviewList = function (options) {
 }
 
 // Gets, stores and pre-renders the reviews.
-var fetchAllReviewList = function (page) {
+var loadReviewList = function (page) {
     fetchReviewList({
         page: page,
-        beforeSend: function () {
-        },
         success: function (data, jqXHR) {
             var link = jqXHR.getResponseHeader('Link') || "";
             var next = (link.indexOf('rel="next"') > 0);
@@ -122,7 +146,7 @@ var fetchAllReviewList = function (page) {
                             banner: (animeData.image_url_banner) ? animeData.image_url_banner : animeData.image_url_lge
                         };
                         
-                        var ractiveAnime = new Ractive({
+                        var ractiveReview = new Ractive({
                             template: '#detailTemplate',
                             data: {
                                 siteTitle: _config.title,
@@ -131,7 +155,7 @@ var fetchAllReviewList = function (page) {
                         });
                         window.animehub.reviews[review.id] = {};
                         window.animehub.reviews[review.id].data = review;
-                        window.animehub.reviews[review.id].html = ractiveAnime.toHTML();
+                        window.animehub.reviews[review.id].html = ractiveReview.toHTML();
                         
                         reviewList[animeData.index] = review;
                         ractiveIndex.set('reviewList', reviewList);
@@ -142,6 +166,44 @@ var fetchAllReviewList = function (page) {
                     }
                 });
             }
+        },
+        error: function (error) {
+            printError(error);
+        }
+    });
+}
+
+var loadReview = function (id) {
+    fetchReview({
+        id: id,
+        success: function (reviewData) {
+            fetchAnimeInfo({
+                id: id,
+                aid: reviewData.title,
+                body: reviewData.body,
+                success: function (animeData) {
+                    var review = {
+                        id: animeData.id,
+                        aid: animeData.id,
+                        title: animeData.title_japanese,
+                        body: animeData.body,
+                        cover: animeData.image_url_lge,
+                        banner: (animeData.image_url_banner) ? animeData.image_url_banner : animeData.image_url_lge
+                    };
+                    
+                    var ractiveReview = new Ractive({
+                        el: 'main',
+                        template: '#detailTemplate',
+                        data: {
+                            siteTitle: _config.title,
+                            review: review
+                        }
+                    });
+                    
+                    $('title').html(review.title + ' - ' + _config.title);
+                    $('.animehub-ribbon').css("background", "url('" + review.banner + "') center / cover");
+                }
+            });
         },
         error: function (error) {
             printError(error);
@@ -163,7 +225,7 @@ var index = function (page) {
     getAniListToken({
         success: function (accessToken) {
             window.animehub.aniListToken = accessToken;
-            fetchAllReviewList(page);
+            loadReviewList(page);
         },
         error: function (error) {
             printError(error);
@@ -174,10 +236,11 @@ var index = function (page) {
 var detail = function (id) {
     if (!window.animehub) {
         window.animehub = {}
+        window.animehub.reviews = {};
         window.animehub.reviews[id] = {}
     }
     
-    if (window.animehub.reviews[id] != undefined) {
+    if (window.animehub.reviews[id].html != undefined) {
         var review = window.animehub.reviews[id];
         $('#main').html(review.html);
         $('title').html(review.data.title + ' - ' + _config.title);
@@ -185,9 +248,15 @@ var detail = function (id) {
         return;
     }
     
-    // TODO: Fetch and show the detail page when there's no pre-rendered one.
-    
-    fetchAnimeInfo()
+    getAniListToken({
+        success: function (accessToken) {
+            window.animehub.aniListToken = accessToken;
+            loadReview(id);
+        },
+        error: function (error) {
+            printError(error);
+        }
+    });
 }
 
 var routes = {
