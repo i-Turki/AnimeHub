@@ -61,6 +61,7 @@ var fetchReviewList = function (options) {
     options.error = options.error || function (jqXHR, textStatus, errorThrown) { };
     
     var data = {
+        per_page: _config.per_page,
         page: options.page
     };
     if (_config.access_token != '') {
@@ -191,6 +192,7 @@ var detail = function (id) {
 
 var routes = {
     '/': index,
+    'page/:page': index,
     'review/:id': detail
 };
 

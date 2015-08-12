@@ -8,6 +8,9 @@ var _config = {
   
     // Your AnimeHub repo name.
     repo: 'AnimeHub',
+    
+    // Reviews to show per page.
+    per_page: 20,
   
     // Your access token for AnimeHub.
     access_token: '',

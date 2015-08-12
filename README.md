@@ -4,11 +4,11 @@ Review and share your favorite anime the hub way.
 
 ## TODO
 
- - [ ] Review list page.
+ - [x] Review list page.
    - [x] Fetch and show the review list.
    - [x] Pre-render the detail pages.
    - [x] Support GitHub's personal access token for more requests allowed.
-   - [ ] Pagination.
+   - [x] Pagination.
  - [ ] Review detail page.
    - [x] Show the pre-rendered detail page.
    - [ ] Fetch and show the detail page when there's no pre-rendered one.

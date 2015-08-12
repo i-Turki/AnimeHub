@@ -52,13 +52,13 @@
           <div class="mdl-cell mdl-cell--1-col-tablet mdl-cell--hide-desktop mdl-cell--hide-phone"></div>
           <div class="mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
             {{#if (prev)}}
-              <button class="mdl-button mdl-js-button">Prev</button>
+              <a href="#page/{{page-1}}" class="mdl-button mdl-js-button">Prev</a>
             {{else}}
               <button class="mdl-button mdl-js-button" disabled>Prev</button>
             {{/if}}
             
             {{#if (next)}}
-              <button class="mdl-button mdl-js-button" style="float: right;">Next</button>
+              <a href="#page/{{page+1}}" class="mdl-button mdl-js-button" style="float: right;">Next</a>
             {{else}}
               <button class="mdl-button mdl-js-button" style="float: right;" disabled>Next</button>
             {{/if}}
