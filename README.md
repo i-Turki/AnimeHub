@@ -10,11 +10,11 @@ Review and share your favorite anime the hub way.
    - [x] Support GitHub's personal access token for more requests allowed.
    - [x] Pagination.
    - [ ] Lazyload.
- - [ ] Review detail page.
+ - [x] Review detail page.
    - [x] Show the pre-rendered detail page.
    - [x] Fetch and show the detail page when there's no pre-rendered one.
    - [x] Navigate back from detail page to list page.
-   - [ ] Parse Markdown into HTML.
+   - [x] Parse Markdown into HTML.
  - [x] Configuration file.
  - [ ] How to write a new review conveniently?
    - [ ] Search for anime and find out its aid.

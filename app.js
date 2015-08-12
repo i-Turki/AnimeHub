@@ -259,6 +259,15 @@ var detail = function (id) {
     });
 }
 
+var helpers = Ractive.defaults.data;
+helpers.markdown2HTML = function (content) {
+    return marked(content, {
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
+}
+
 var routes = {
     '/': index,
     'page/:page': index,

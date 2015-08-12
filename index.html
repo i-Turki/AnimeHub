@@ -12,11 +12,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
   
   <script src="assets/js/jquery-2.1.4.min.js"></script>
   <script src="bower_components/director/build/director.min.js"></script>
   <script src="bower_components/ractive/ractive.min.js"></script>
   <script src="bower_components/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
   <script src="config.js"></script>
 </head>
 <body>
@@ -89,7 +91,7 @@
         <div class="animehub-review__content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
           {{#review}}
             <h3>{{title}}</h3>
-            {{body}}
+            {{{markdown2HTML(body)}}}
           {{/review}}
         </div>
       </div>
