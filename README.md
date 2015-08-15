@@ -2,7 +2,13 @@
 
 AnimeHub is a simple platform for reviewing and sharing your favorite anime. You can find a demo [here](http://bitex.me/AnimeHub/).
 
-AnimeHub is written using JavaScript and [Ractive.js](http://www.ractivejs.org/) which means you can host it on GitHub Pages. Also, it uses the issues of your GitHub repo to store your anime reviews.
+AnimeHub is written using JavaScript which means you can host it on GitHub Pages. Also, it uses the issues of your GitHub repo to store your anime reviews.
+
+## Features
+
+ - No server needed: hosted on GitHub Pages and use your GitHub issues as storage.
+ - Anime info and images from [AniList](https://anilist.co/).
+ - [GFM (GitHub Flavored Markdown)](https://help.github.com/articles/github-flavored-markdown/) support.
 
 ## Installation
 
@@ -14,7 +20,7 @@ AnimeHub is written using JavaScript and [Ractive.js](http://www.ractivejs.org/)
  6. Edit the file `config.js`. You should at least put in your username, repo name (the one you created at step 1), AniList client ID and secret.
  7. Commit and push your changes. Your AnimeHub should be available at **http://yourusername.github.io/AnimeHub**.
 
-By default, GitHub has a limit on the API request rate, which is up to 60 requests per hour. If you find this rate insufficient, you should create an access token on [this page](https://github.com/settings/tokens). **Deselect all the scopes when creating your access token**. You will see your newly created token after submitting your generation form and you should copy and paste it in the `config.js`.
+By default, GitHub has a limit on the API request rate, which is up to 60 requests per hour. If you find it insufficient, you should create an access token for AnimeHub on [this page](https://github.com/settings/tokens). **Do not select any scope when creating your access token**. You will see your newly created token after submitting your generation form and you should copy and paste it into the `config.js`.
 
 ## Write your reviews
 
@@ -22,13 +28,14 @@ AnimeHub uses your GitHub issues as the storage of your reviews. Title of your i
 
 ## Credits
 
-AnimeHub was inspired by an idea from [Dev Ideas](https://devideas.github.io/). It's a great email newsletter for insteresting dev ideas.
-
-This project uses the anime information and images from [AniList](https://anilist.co/).
-
-Material Design tastes good and [Material Design Lite](http://www.getmdl.io/) is a great bunch of tools.
-
-And of course, thanks [GitHub](https://github.com/) for the tremendous service.
+ - [Dev Ideas](https://devideas.github.io/): for an idea that inspired AnimeHub.
+ - [wuhaoworld/github-issues-blog](https://github.com/wuhaoworld/github-issues-blog): for the code. It also inspired me that GitHub issues can be of great use.
+ - [AniList](https://anilist.co/): for the anime information and images.
+ - [Material Design Lite](http://www.getmdl.io/).
+ - [Ractive.js](http://www.ractivejs.org/).
+ - [Director](https://github.com/flatiron/director).
+ - [markdown-js](https://github.com/evilstreak/markdown-js).
+ - [GitHub](https://github.com).
 
 ## License
 
