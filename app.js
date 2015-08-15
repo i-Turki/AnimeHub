@@ -1,6 +1,22 @@
 var printError = function (error) {
     console.error(error);
-}
+};
+
+var showSpinner = function () {
+    var spinner = document.createElement('div');
+    spinner.className = 'animehub-spinner mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active';
+    componentHandler.upgradeElement(spinner)
+    var spinnerCenter = document.createElement('center')
+    spinnerCenter.appendChild(spinner)
+    componentHandler.upgradeElement(spinnerCenter);
+    var spinnerMain = document.createElement('main')
+    spinnerMain.className = 'animehub-content mdl-layout__content';
+    spinnerMain.appendChild(spinnerCenter)
+    componentHandler.upgradeElement(spinnerMain)
+    
+    $('#main').empty();
+    $('#main').append(spinnerMain);
+};
 
 // Gets an access token from AniList.
 var getAniListToken = function (options) {
@@ -23,7 +39,7 @@ var getAniListToken = function (options) {
             options.error(errorThrown);
         }
     });
-}
+};
 
 // Gets info of an anime from AniList.
 var fetchAnimeInfo = function (options) {
@@ -50,7 +66,7 @@ var fetchAnimeInfo = function (options) {
             options.error(errorThrown);
         }
     });
-}
+};
 
 // Gets a single review (issue) from the GitHub repo.
 var fetchReview = function (options) {
@@ -76,7 +92,7 @@ var fetchReview = function (options) {
             options.error(errorThrown);
         }
     });
-}
+};
 
 // Gets the list of reviews (issues) from the GitHub repo.
 var fetchReviewList = function (options) {
@@ -105,7 +121,7 @@ var fetchReviewList = function (options) {
             options.error(errorThrown);
         }
     });
-}
+};
 
 // Gets, stores and pre-renders the reviews.
 var loadReviewList = function (page) {
@@ -171,7 +187,7 @@ var loadReviewList = function (page) {
             printError(error);
         }
     });
-}
+};
 
 var loadReview = function (id) {
     fetchReview({
@@ -209,10 +225,12 @@ var loadReview = function (id) {
             printError(error);
         }
     });
-}
+};
 
 var index = function (page) {
     page = parseInt(page) || 1;
+    
+    showSpinner();
     
     $('title').html(_config.title);
     window.animehub = window.animehub || { reviews: {}, reviewList: {}, aniListToken: '' };
@@ -231,9 +249,11 @@ var index = function (page) {
             printError(error);
         }
     });
-}
+};
 
 var detail = function (id) {
+    showSpinner();
+    
     if (!window.animehub) {
         window.animehub = {}
         window.animehub.reviews = {};
@@ -258,7 +278,7 @@ var detail = function (id) {
             printError(error);
         }
     });
-}
+};
 
 var helpers = Ractive.defaults.data;
 helpers.markdown2HTML = function (content) {
@@ -267,7 +287,11 @@ helpers.markdown2HTML = function (content) {
             return hljs.highlightAuto(code).value;
         }
     });
-}
+};
+
+window.ractiveSpinner = new Ractive({
+    template: '#spinnerTemplate'
+});
 
 var routes = {
     '/': index,
