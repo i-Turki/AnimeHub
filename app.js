@@ -110,6 +110,12 @@ var fetchReviewList = function (options) {
         data.access_token = _config.access_token;
     }
     
+    if (_config.issue_filter == 'user') {
+        data.creator = _config.issue_filter_username;
+    } else if (_config.issue_filter == 'label') {
+        data.labels = _config.issue_filter_label;
+    }
+    
     $.ajax({
         url: "https://api.github.com/repos/" + _config.username + "/" + _config.repo + "/issues",
         data: data,
