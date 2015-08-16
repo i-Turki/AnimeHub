@@ -24,7 +24,7 @@ By default, GitHub has a limit on the API request rate, which is up to 60 reques
 
 ## Write your reviews
 
-AnimeHub uses your GitHub issues as the storage of your reviews. Title of your issues must be the ID of the anime on AniList. For the present, there isn't a way that you can fetch the anime ID and write the reviews easily. You must get the ID from AniList your self and write your texts directly in the GitHub issues page. There will soon be a editor feature you can use to search for the anime and write your reviews. 
+AnimeHub uses your GitHub issues as the storage of your reviews. Title of your issues must be the ID of the anime on AniList. For the present, there isn't a way that you can fetch the anime ID and write the reviews easily. You must get the ID from AniList yourself and write your texts directly in the GitHub issues page. There will soon be an editor feature you can use to search for the anime and write your reviews. 
 
 ## Credits
 
